@@ -1,0 +1,28 @@
+#!/usr/bin/env ruby
+
+require 'net/http'
+
+PATHS = %w(
+  Harry%20Potter%201%20-%20Sorcerer's%20Stone.txt
+  Harry%20Potter%202%20-%20Chamber%20of%20Secrets.txt
+  Harry%20Potter%203%20-%20The%20Prisoner%20Of%20Azkaban.txt
+  Harry%20Potter%204%20-%20The%20Goblet%20Of%20Fire.txt
+  Harry%20Potter%205%20-%20Order%20of%20the%20Phoenix.txt
+  Harry%20Potter%206%20-%20The%20Half%20Blood%20Prince.txt
+  Harry%20Potter%207%20-%20Deathly%20Hollows.txt
+)
+
+PATHS.each_with_index do |path, index|
+  puts "Downloading book #{index + 1}"
+  File.open("texts/HP#{index + 1}.txt", "w") do |file|
+
+    file.write(
+      Net::HTTP.get(
+        URI("http://www.glozman.com/TextPages/" + path)
+      )
+    )
+  end
+end
+
+
+
