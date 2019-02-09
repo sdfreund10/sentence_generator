@@ -1,28 +1,27 @@
 #!/usr/bin/env ruby
 
-require 'net/http'
 
-PATHS = %w(
-  Harry%20Potter%201%20-%20Sorcerer's%20Stone.txt
-  Harry%20Potter%202%20-%20Chamber%20of%20Secrets.txt
-  Harry%20Potter%203%20-%20The%20Prisoner%20Of%20Azkaban.txt
-  Harry%20Potter%204%20-%20The%20Goblet%20Of%20Fire.txt
-  Harry%20Potter%205%20-%20Order%20of%20the%20Phoenix.txt
-  Harry%20Potter%206%20-%20The%20Half%20Blood%20Prince.txt
-  Harry%20Potter%207%20-%20Deathly%20Hollows.txt
-)
+require_relative './script_puller.rb'
 
-PATHS.each_with_index do |path, index|
-  puts "Downloading book #{index + 1}"
-  File.open("texts/HP#{index + 1}.txt", "w") do |file|
-
-    file.write(
-      Net::HTTP.get(
-        URI("http://www.glozman.com/TextPages/" + path)
-      )
-    )
+SHOWS.each do |show|
+  puts "Pulling scripts for show #{show}: "
+  if show == 'Voyager'
+    ScriptPuller.new(show, 'episode_listing.htm').pull_scripts
+  else
+    ScriptPuller.new(show).pull_scripts
   end
 end
 
+zipfile_name = "scripts/scripts.zip"
+scripts = Dir["scripts/*.txt"]
+FileUtils.rm(zipfile_name) if File.exists?(zipfile_name)
+Zip::File.open(zipfile_name, Zip::File::CREATE) do |zipfile|
+  scripts.each do |script|
+    filename = File.basename(script)
+    zipfile.add(filename, script)
+  end
+end
+
+scripts.each { |file| FileUtils.rm(file) }
 
 
