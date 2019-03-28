@@ -28,4 +28,3 @@ module SentenceGenerator
     end
   end
 end
-

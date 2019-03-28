@@ -2,9 +2,6 @@
 
 module SentenceGenerator
   class WordChain
-    def initialize(chain)
-      @chain = chain
-    end
+    def initialize; end
   end
 end
-
