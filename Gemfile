@@ -1,6 +1,5 @@
-source "https://rubygems.org"
+source 'https://rubygems.org'
 
-gem "webmock"
-gem "nokogiri"
-gem "rubyzip"
-
+gem 'nokogiri'
+gem 'rubyzip'
+gem 'webmock'

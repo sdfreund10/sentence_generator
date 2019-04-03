@@ -3,7 +3,7 @@
 require 'minitest/autorun'
 require_relative '../lib/sentence_generator'
 
-class ScriptTest < MiniTest::Unit::TestCase
+class ScriptTest < MiniTest::Test
   def test_lines_separates_script_into_lines
     text = "A: this is a test script\r\nB: it has two lines"
     script = SentenceGenerator::Script.new(text)

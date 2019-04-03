@@ -1,6 +1,5 @@
 #!/usr/bin/env ruby
 
-
 require_relative './script_puller.rb'
 
 SHOWS.each do |show|
@@ -12,9 +11,9 @@ SHOWS.each do |show|
   end
 end
 
-zipfile_name = "scripts/scripts.zip"
-scripts = Dir["scripts/*.txt"]
-FileUtils.rm(zipfile_name) if File.exists?(zipfile_name)
+zipfile_name = 'scripts/scripts.zip'
+scripts = Dir['scripts/*.txt']
+FileUtils.rm(zipfile_name) if File.exist?(zipfile_name)
 Zip::File.open(zipfile_name, Zip::File::CREATE) do |zipfile|
   scripts.each do |script|
     filename = File.basename(script)
@@ -23,5 +22,3 @@ Zip::File.open(zipfile_name, Zip::File::CREATE) do |zipfile|
 end
 
 scripts.each { |file| FileUtils.rm(file) }
-
-

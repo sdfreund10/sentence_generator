@@ -6,14 +6,18 @@ module SentenceGenerator
       @files = files
     end
 
-    def word_chains_by_character
-      combine_file_data.transform_values do |lines|
-        lines.map { |line| line.split(/\s|(?=[[:punct:]])/) }
+    def word_chain_for(character)
+      chain = WordChain.new
+      sentences_by_character[character].each do |sentence|
+        chain.add sentence
       end
+      chain
     end
 
     def sentences_by_character
-      combine_file_data
+      combine_file_data.transform_values do |sentences|
+        sentences.map { |sentence| Sentence.new(sentence) }
+      end
     end
 
     def combine_file_data

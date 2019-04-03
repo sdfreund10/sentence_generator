@@ -17,7 +17,7 @@ module SentenceGenerator
       seed = rand
       cumulative_transition_probabilities.find do |_word, prob|
         seed < prob
-      end.first
+      end.first # will return [word, probability]
     end
 
     def transition_probabilities

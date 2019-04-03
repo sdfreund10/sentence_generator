@@ -61,17 +61,17 @@ module SentenceGenerator
       random_words = (1..1_000).map { word.next_word }
       # because randomness, each of the following will fail 3% of the time
       assert_in_delta(
-        random_words.count { |word| word == 'add' },
+        random_words.count { |rand_word| rand_word == 'add' },
         250,
         30
       )
       assert_in_delta(
-        random_words.count { |word| word == 'new' },
+        random_words.count { |rand_word| rand_word == 'new' },
         500,
         35
       )
       assert_in_delta(
-        random_words.count { |word| word == 'word' },
+        random_words.count { |rand_word| rand_word == 'word' },
         250,
         30
       )
