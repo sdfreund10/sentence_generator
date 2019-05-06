@@ -33,7 +33,7 @@ class ScriptPuller
       page = Nokogiri::HTML(
         Net::HTTP.get(URI(script_url))
       )
-      File.open("scripts/#{@show}-#{episode_number}.txt", "w") do |file|
+      File.open("example/scripts/#{@show}-#{episode_number}.txt", "w") do |file|
         file.write(
           page.search("body > div > center > table > tbody > tr > td").inner_text
         )
